@@ -1,0 +1,17 @@
+module tb_t_flipflop;
+    reg clk, reset, t;
+    wire q;
+
+    t_flipflop uut(clk, reset, t, q);
+
+    always #5 clk = ~clk;
+
+    initial begin
+        $dumpfile("tff.vcd"); $dumpvars(0, tb_t_flipflop);
+        clk = 0; reset = 1; t = 0; #10;
+        reset = 0; t = 1; #20;
+        t = 0; #10;
+        t = 1; #20;
+        $finish;
+    end
+endmodule
